@@ -1,3 +1,4 @@
+//
 package bg.softuni.springmvc.model;
 
 public class UserDTO {
