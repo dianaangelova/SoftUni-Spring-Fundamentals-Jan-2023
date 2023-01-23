@@ -21,7 +21,7 @@ public class UserController {
                                                 // Spring разбира, че искаме да намапнем формата, което идва по http с това dto
         System.out.println("Creating new user " + userDTO);
 
-        return "usercreated"; // Накрася връщаме темплейт и показваме крайния резултат на user-a
+        return "usercreated"; // Накрая връщаме темплейт и показваме крайния резултат на user-a
     }
 
 }
