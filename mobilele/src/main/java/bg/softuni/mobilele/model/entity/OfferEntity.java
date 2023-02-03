@@ -22,9 +22,10 @@ public class OfferEntity {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
-   // @Type(type="uuid_char")
+    @Column(columnDefinition = "varchar(255)")
     private UUID id;
 
+    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
