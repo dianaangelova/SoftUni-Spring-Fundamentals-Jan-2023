@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/user") //1. Приема get и post заявки към end point-a, kойто е user
+@RequestMapping("/userRegister") //1. Приема get и post заявки към end point-a, kойто е user
 public class UserController {
 
     @GetMapping() //2. Изпълнява се get мапинга и той връща темплейт newuser, в който се съдържа html форма с две полета
