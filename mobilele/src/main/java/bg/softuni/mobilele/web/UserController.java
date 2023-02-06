@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -19,12 +18,12 @@ public class UserController {
     }
 
 
-    @GetMapping("/login")
+    @GetMapping("/users/login")
     public String login() {
         return "auth-login";
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/users/logout")
     public String logout() {
         userService.logout();
         System.out.println("User is logged out");
@@ -32,7 +31,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/users/login")
     public String login(UserLoginDTO userLoginDTO) {
         userService.login(userLoginDTO);
         System.out.println("User is logged: " + userService.login(userLoginDTO));
@@ -47,9 +46,9 @@ public class UserController {
     @PostMapping ("/users/register")
     public String register(UserRegisterDTO userRegisterDTO){
 
-         // userService.register(userRegisterDTO);
+        userService.registerAndLogin(userRegisterDTO);
 
-        return "redirect/";
+        return "redirect:/";
     }
 
 }
