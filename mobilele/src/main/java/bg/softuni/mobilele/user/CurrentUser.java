@@ -5,6 +5,7 @@ import org.springframework.web.context.annotation.SessionScope;
 
 @Component
 @SessionScope // този bean e различен за всяка една юзерска сесия
+//CurrentUser Не е добра практика да се прави, този клас ще бъде подобрен, когато вземем Spring Security
 public class CurrentUser {
 
     private String name;

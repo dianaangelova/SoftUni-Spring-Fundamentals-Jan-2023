@@ -68,7 +68,7 @@ public class UserService {
                 .setEmail(userRegisterDTO.getEmail())
                 .setFirstName(userRegisterDTO.getFirstName())
                 .setLastName(userRegisterDTO.getLastName())
-                .setPassword(passwordEncoder.encode(newUser.getPassword()));
+                .setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
 
         newUser = userRepository.save(newUser);
 
