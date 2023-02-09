@@ -67,13 +67,13 @@
                     <div class="col-auto">
                         <input name="email"
                                th:field="*{email}"
-                               th:errorclass="is-invalid"
                                required
                                type="email"
                                id="inputEmail"
                                class="form-control"
                                aria-describedby="emailHelpInline">
-                        <small id="emailError"
+                        <small th:if="${#fields.hasErrors('email')}"
+                                id="emailError"
                                class="invalid-feedback  form-text bg-danger rounded">Must be valid email</small>
                     </div>
                 </div>

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class AuthController {
 
-    @ModelAttribute
+    @ModelAttribute("userRegistrationDTO")
     public UserRegistrationDTO initForm() {
       return new UserRegistrationDTO();
     }
