@@ -5,20 +5,21 @@ import bg.softuni.pathfinder.model.enums.UserLevelEnum;
 import jakarta.persistence.*;
 
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class UserEntity extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(name="full_name")
+    @Column(name = "full_name")
     private String fullName;
 
-    @Column()
+
     private int age;
 
     @Column(nullable = false)
@@ -33,8 +34,8 @@ public class UserEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private LevelEnum level;
 
-    public UserEntity(){
-        this.roles=new HashSet<>();
+    public UserEntity() {
+        this.roles = new HashSet<>();
     }
 
     public String getUsername() {
