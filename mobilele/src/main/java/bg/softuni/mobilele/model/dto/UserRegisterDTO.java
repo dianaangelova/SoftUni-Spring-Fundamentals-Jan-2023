@@ -11,7 +11,7 @@ public class UserRegisterDTO {
     private String firstName;
 
     @NotEmpty
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 20, message = "Size must be between 2 and 20.")
     private String lastName;
     @NotEmpty
     @Email
