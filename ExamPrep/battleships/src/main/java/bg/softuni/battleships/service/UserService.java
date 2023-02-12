@@ -1,5 +1,6 @@
 package bg.softuni.battleships.service;
 
+import bg.softuni.battleships.model.dto.UserLoginDTO;
 import bg.softuni.battleships.model.dto.UserRegisterDTO;
 import bg.softuni.battleships.model.entity.UserEntity;
 import bg.softuni.battleships.repository.UserRepository;
@@ -53,4 +54,13 @@ public class UserService {
         return true;
     }
 
+    public boolean login(UserLoginDTO userLoginDTO) {
+
+        Optional<UserEntity> userByUsernameAndPassword = userRepository.findByUsernameAndPassword(userLoginDTO.getUsername(), userLoginDTO.getPassword());
+
+        if (!userByUsernameAndPassword.isPresent()){
+            return false;
+        }
+        return  true;
+    }
 }
