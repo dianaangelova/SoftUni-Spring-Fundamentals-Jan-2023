@@ -32,7 +32,7 @@ public class UserService {
 
         Optional<UserEntity> userByEmail = userRepository.findAllByEmail(userRegisterDTO.getEmail());
 
-        if (userByEmail.isPresent()){
+        if (userByEmail.isPresent()) {
             return false;
         }
 
@@ -40,7 +40,7 @@ public class UserService {
 
         Optional<UserEntity> userByUsername = userRepository.findAllByUsername(userRegisterDTO.getUsername());
 
-        if (userByUsername.isPresent()){
+        if (userByUsername.isPresent()) {
             return false;
         }
 
@@ -56,11 +56,15 @@ public class UserService {
 
     public boolean login(UserLoginDTO userLoginDTO) {
 
-        Optional<UserEntity> userByUsernameAndPassword = userRepository.findByUsernameAndPassword(userLoginDTO.getUsername(), userLoginDTO.getPassword());
+        Optional<UserEntity> userByUsernameAndPassword = this.userRepository.findByUsernameAndPassword(userLoginDTO.getUsername(), userLoginDTO.getPassword());
 
-        if (!userByUsernameAndPassword.isPresent()){
+        if (userByUsernameAndPassword.isEmpty()) {
             return false;
         }
-        return  true;
+
+        //actual login
+        this.currentUser.login(userByUsernameAndPassword.get());
+
+        return true;
     }
 }
