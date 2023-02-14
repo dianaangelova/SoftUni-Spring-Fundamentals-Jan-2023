@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import java.time.LocalDate;
@@ -18,18 +19,20 @@ public class CreateShipDTO {
     @Size(min=2, max=10)
     private String name;
 
-    @NotBlank
     @Positive
+    @NotNull
     private long health;
 
-    @NotBlank
     @Positive
+    @NotNull
     private long power;
 
-    @NotBlank
     @PastOrPresent
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
     private LocalDate created;
 
-    @NotBlank
-    private CategoryEntity category;
+    @Positive
+    @NotNull
+    private int category=-1;
 }
