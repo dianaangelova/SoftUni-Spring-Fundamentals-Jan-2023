@@ -12,14 +12,14 @@ import org.springframework.web.context.annotation.SessionScope;
 @Getter
 @Setter
 public class CurrentUser {
-    private Long id;
+    private long id;
     private String fullName;
     public void login(UserEntity user){
         this.id= user.getId();
         this.fullName= user.getFullName();
     }
     public void logout(UserEntity user){
-        this.id= null;
+        this.id= 0;
         this.fullName= null;
     }
 }

@@ -20,10 +20,10 @@ public class ShipEntity extends  BaseEntity{
     private String name;
 
     @Column(nullable = false)
-    private Long health;
+    private long health;
 
     @Column(nullable = false)
-    private Long power;
+    private long power;
 
     @Column(nullable = false)
     private LocalDate created;
