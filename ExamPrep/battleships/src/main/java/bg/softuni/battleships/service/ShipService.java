@@ -1,6 +1,7 @@
 package bg.softuni.battleships.service;
 
 import bg.softuni.battleships.model.dto.CreateShipDTO;
+import bg.softuni.battleships.model.dto.ShipDTO;
 import bg.softuni.battleships.model.entity.CategoryEntity;
 import bg.softuni.battleships.model.entity.ShipEntity;
 import bg.softuni.battleships.model.entity.UserEntity;
@@ -12,13 +13,14 @@ import bg.softuni.battleships.user.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ShipService {
     private final ShipRepository shipRepository;
     private final CurrentUser currentUser;
-
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
 
@@ -63,5 +65,16 @@ public class ShipService {
 
         this.shipRepository.save(ship);
         return true;
+    }
+
+    public List<ShipDTO> getShipsOwnedBy(Long ownerId) {
+        return this.shipRepository.findByUserId(ownerId)
+                .stream()
+                .map(ship -> new ShipDTO(ship))
+                .collect(Collectors.toList());
+    }
+
+    public List<ShipDTO> getShipsNotOwnedBy(Long ownerId) {
+        return this.shipRepository.findByNotUserId(ownerId);
     }
 }
