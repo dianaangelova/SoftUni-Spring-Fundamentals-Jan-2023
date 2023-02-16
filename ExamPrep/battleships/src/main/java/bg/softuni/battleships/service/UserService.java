@@ -60,7 +60,7 @@ public class UserService {
 
     public boolean login(UserLoginDTO userLoginDTO) {
 
-        Optional<UserEntity> userByUsernameAndPassword = this.userRepository.findByUsernameAndPassword(userLoginDTO.getUsername(), userLoginDTO.getPassword());
+        Optional<UserEntity> userByUsernameAndPassword = this.userRepository.findByUsername(userLoginDTO.getUsername());
 
         if(userByUsernameAndPassword.isPresent()) {
 
