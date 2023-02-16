@@ -36,18 +36,18 @@ public class ShipService {
 
         Optional<ShipEntity> foundShipByName = this.shipRepository.findByName(createShipDTO.getName());
 
-        if(foundShipByName.isPresent()){
+        if (foundShipByName.isPresent()) {
             return false;
         }
 
-        CategoryName categoryName = switch (createShipDTO.getCategory()){
-            case 0-> CategoryName.BATTLE;
-            case 1-> CategoryName.CARGO;
-            case 2-> CategoryName.PATROL;
+        CategoryName categoryName = switch (createShipDTO.getCategory()) {
+            case 0 -> CategoryName.BATTLE;
+            case 1 -> CategoryName.CARGO;
+            case 2 -> CategoryName.PATROL;
             default -> CategoryName.BATTLE;
         };
 
-        Optional< CategoryEntity > categoryMatch = this.categoryRepository.findByName(categoryName);
+        Optional<CategoryEntity> categoryMatch = this.categoryRepository.findByName(categoryName);
 
         ShipEntity ship = new ShipEntity();
 
@@ -70,11 +70,21 @@ public class ShipService {
     public List<ShipDTO> getShipsOwnedBy(Long ownerId) {
         return this.shipRepository.findByUserId(ownerId)
                 .stream()
-                .map(ship -> new ShipDTO(ship))
+                .map(ShipDTO::new)
                 .collect(Collectors.toList());
     }
 
     public List<ShipDTO> getShipsNotOwnedBy(Long ownerId) {
-        return this.shipRepository.findByNotUserId(ownerId);
+        return this.shipRepository.findByUserIdNot(ownerId)
+                .stream()
+                .map(ShipDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<ShipDTO> getAllSorted() {
+        return this.shipRepository.findByOrderByNameAscHealthAscPowerAsc()
+                .stream()
+                .map(ShipDTO::new)
+                .collect(Collectors.toList());
     }
 }

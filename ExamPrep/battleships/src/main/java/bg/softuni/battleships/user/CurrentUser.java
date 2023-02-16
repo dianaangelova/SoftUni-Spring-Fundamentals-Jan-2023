@@ -18,7 +18,7 @@ public class CurrentUser {
         this.id= user.getId();
         this.fullName= user.getFullName();
     }
-    public void logout(UserEntity user){
+    public void logout(){
         this.id= 0;
         this.fullName= null;
     }

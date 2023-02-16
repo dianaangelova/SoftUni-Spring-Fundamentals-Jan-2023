@@ -66,4 +66,15 @@ public class UserService {
 
         return true;
     }
+    public void logout() {
+        this.currentUser.logout();
+    }
+
+    public boolean isLoggedIn() {
+        return this.currentUser.getId() > 0;
+    }
+
+    public long getLoggedUserId() {
+        return this.currentUser.getId();
+    }
 }

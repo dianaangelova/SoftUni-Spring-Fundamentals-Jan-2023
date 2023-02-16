@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class AuthController {
     private final UserService userService;
-
     @Autowired
     public AuthController(UserService userService) {
         this.userService = userService;
@@ -33,6 +32,11 @@ public class AuthController {
 
     @GetMapping("/register")
     public String register() {
+
+        if(this.userService.isLoggedIn()){
+            return "redirect:/home";
+        }
+
         return "register";
     }
 
@@ -41,6 +45,9 @@ public class AuthController {
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes
                            ){
+        if(this.userService.isLoggedIn()){
+            return "redirect:/home";
+        }
 
         if(bindingResult.hasErrors() || !this.userService.register(userRegisterDTO)){
             redirectAttributes.addFlashAttribute("userRegisterDTO", userRegisterDTO);
@@ -53,6 +60,11 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
+
+        if(this.userService.isLoggedIn()){
+            return "redirect:/home";
+        }
+
         return "login";
     }
 
@@ -61,6 +73,10 @@ public class AuthController {
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes
     ){
+        if(this.userService.isLoggedIn()){
+            return "redirect:/home";
+        }
+
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("userLoginDTO", userLoginDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginDTO", bindingResult);
@@ -75,5 +91,12 @@ public class AuthController {
             return "redirect:/login";
         }
         return "redirect:/home";
+    }
+
+
+    @GetMapping("/logout")
+    public String logout(){
+        this.userService.logout();
+        return "redirect:/";
     }
 }
