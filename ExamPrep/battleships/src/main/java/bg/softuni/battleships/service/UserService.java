@@ -6,6 +6,7 @@ import bg.softuni.battleships.model.entity.UserEntity;
 import bg.softuni.battleships.repository.UserRepository;
 import bg.softuni.battleships.user.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,12 +15,15 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final CurrentUser currentUser;
+    private final PasswordEncoder passwordEncoder;
+
 
     @Autowired
     public UserService(UserRepository userRepository,
-                       CurrentUser currentUser) {
+                       CurrentUser currentUser, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.currentUser = currentUser;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public boolean register(UserRegisterDTO userRegisterDTO) {
@@ -47,7 +51,8 @@ public class UserService {
         user.setUsername(userRegisterDTO.getUsername());
         user.setFullName(userRegisterDTO.getFullName());
         user.setEmail(userRegisterDTO.getEmail());
-        user.setPassword(userRegisterDTO.getPassword());
+
+        user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
 
         this.userRepository.save(user);
         return true;
@@ -57,14 +62,21 @@ public class UserService {
 
         Optional<UserEntity> userByUsernameAndPassword = this.userRepository.findByUsernameAndPassword(userLoginDTO.getUsername(), userLoginDTO.getPassword());
 
-        if (userByUsernameAndPassword.isEmpty()) {
+        if(userByUsernameAndPassword.isPresent()) {
+
+            String encodedPassword = userByUsernameAndPassword.get().getPassword();
+            String rawPassword = userLoginDTO.getPassword();
+
+            if(passwordEncoder.matches(rawPassword, encodedPassword)) {
+                this.currentUser.login(userByUsernameAndPassword.get());
+
+                return true;
+            }
+
             return false;
         }
 
-        //actual login
-        this.currentUser.login(userByUsernameAndPassword.get());
-
-        return true;
+        return false;
     }
     public void logout() {
         this.currentUser.logout();
