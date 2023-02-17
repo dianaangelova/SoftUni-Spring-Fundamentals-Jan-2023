@@ -1,40 +1,25 @@
 package bg.softuni.likebook.user;
 
+import bg.softuni.likebook.model.entity.UserEntity;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
+@Getter
+@Setter
 @Component
 @SessionScope // този bean e различен за всяка една юзерска сесия
 //CurrentUser Не е добра практика да се прави, този клас ще бъде подобрен, когато вземем Spring Security
 public class CurrentUser {
-
-    private String name;
-    private boolean isLoggedIn;
-
-    public String getName() {
-        return name;
+    private long id;
+    private String username;
+    public void login(UserEntity user){
+        this.id= user.getId();
+        this.username= user.getUsername();
     }
-
-    public CurrentUser setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public boolean isLoggedIn() {
-        return isLoggedIn;
-    }
-
-    public CurrentUser setLoggedIn(boolean loggedIn) {
-        isLoggedIn = loggedIn;
-        return this;
-    }
-
-    public void clear() {
-        isLoggedIn = false;
-        name = null;
-    }
-
-    public boolean isAnonymous(){
-        return !isLoggedIn();
+    public void logout(){
+        this.id= 0;
+        this.username= null;
     }
 }

@@ -1,16 +1,12 @@
-package bg.softuni.likebook.model.entity;
+package bg.softuni.examtemplate.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name="posts")
-@Getter
-@Setter
 public class PostEntity extends  BaseEntity{
 
     @Column(nullable = false)

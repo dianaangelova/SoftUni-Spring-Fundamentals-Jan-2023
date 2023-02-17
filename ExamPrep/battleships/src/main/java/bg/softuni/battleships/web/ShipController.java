@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class ShipController {
     private final ShipService shipService;
-
     private final UserService userService;
     @Autowired
     public ShipController(ShipService shipService, UserService userService) {
