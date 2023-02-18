@@ -2,15 +2,15 @@ package com.example.shoppinglist.model.entity;
 
 import com.example.shoppinglist.model.enums.ProductTypeEnum;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "categories")
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CategoryEntity extends BaseEntity {
 
     @Column(unique = true, nullable = false)

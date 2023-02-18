@@ -1,5 +1,15 @@
 package com.example.shoppinglist.model.enums;
 
 public enum ProductTypeEnum {
-    Food, Drink, Household, Other
+
+    FOOD("Food"),
+    DRINK("Drink"),
+    HOUSEHOLD("Household"),
+    OTHER("Other");
+
+    public final String label;
+
+    ProductTypeEnum(String label) {
+        this.label = label;
+    }
 }
