@@ -1,4 +1,4 @@
-package com.example.examtemplate.web;
+package com.example.examtemplate.controller;
 
 import bg.softuni.likebook.model.dto.PostDTO;
 import bg.softuni.likebook.service.PostService;

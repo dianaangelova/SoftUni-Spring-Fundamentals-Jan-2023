@@ -38,7 +38,6 @@ public class SongService {
 
     public List<SongDTO> getSongsNotOwnedBy(long loggedUserId) {
         return null;
-
     }
 
     public boolean create(CreateSongDTO createSongDTO) {

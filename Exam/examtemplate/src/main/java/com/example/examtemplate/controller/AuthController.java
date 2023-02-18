@@ -1,4 +1,4 @@
-package com.example.examtemplate.web;
+package com.example.examtemplate.controller;
 
 import com.example.examtemplate.model.dto.UserLoginDTO;
 import com.example.examtemplate.model.dto.UserRegisterDTO;

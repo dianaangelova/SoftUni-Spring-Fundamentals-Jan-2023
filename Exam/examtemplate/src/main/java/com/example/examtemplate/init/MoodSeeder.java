@@ -1,4 +1,4 @@
-package com.example.examtemplate.seeder;
+package com.example.examtemplate.init;
 
 import com.example.examtemplate.model.entity.MoodEntity;
 import com.example.examtemplate.model.enums.MoodTypeEnum;
